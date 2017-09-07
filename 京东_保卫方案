@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while(scanner.hasNext()){
+            int n = scanner.nextInt();
+            int [] arr = new int[n];
+            for(int i=0;i<n;i++){
+                arr[i]=scanner.nextInt();
+            }
+            System.out.println(getCount(arr));
+        }
+//        int n = 5;
+//        int [] str = {1,2,4,5,3};
+//
+//        System.out.println(num(n,str));
+    }
+
+    private static int getCount(int[] arr) {
+        if(arr==null||arr.length<2){
+            return 0;
+        }else {
+            int res = 0;
+            int[][]dp = getDP(arr);
+            for (int i = 0; i < dp.length; i++) {
+                for (int j = 0; j < dp.length; j++) {
+                    res += dp[i][j];
+                }
+            }
+            return res / 2;
+        }
+    }
+
+    private static int[][] getDP(int[] arr) {
+        int[][] dp = new int[arr.length][arr.length];
+        dp[0][arr.length - 1] = 1;  //头尾是相邻的，配对
+        dp[arr.length - 1][0] = 1;
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp.length; j++) {
+                if(dp[i][j] == 0){
+                    if(i == j){
+                        dp[i][j] = 0;   //自己跟自己不配对
+                    }else if (i == j - 1 || j == i - 1) {
+                        dp[i][j] = 1;   //相邻的配对
+                    }else {
+                        //如果dp[i][j-1]为1，则arr[j-1]满足arr[j - 1] <= Math.min(arr[i], arr[j])使arr[i]、arr[j]配对
+                        if (j > 0 && dp[i][j - 1] == 1&& arr[j - 1] <= Math.min(arr[i], arr[j])) {
+                            dp[i][j] = 1;
+                        }
+                        //如果dp[i-1][j]为1，则arr[i-1]满足arr[i - 1] <= Math.min(arr[i], arr[j])使arr[i]、arr[j]配对
+                        if (i > 0 && dp[i - 1][j] == 1&& arr[i - 1] <= Math.min(arr[i], arr[j])) {
+                            dp[i][j] = 1;
+                        }
+                    }
+                }
+            }
+        }
+        return dp;
+    }
+
+}
+
