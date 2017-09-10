@@ -1,0 +1,23 @@
+public class xuanze {
+    public static void main(String[] args){
+        int[] num={2,4,1,3};
+        num = sorted(num);
+        for(int i=0;i<num.length;i++){
+            System.out.println(num[i]);
+        }
+    }
+    public static int[] sorted(int[] num){
+        for(int j=0;j<num.length;j++){
+            int min=num[j];
+            for(int i=j+1;i<num.length;i++){
+                if(num[i]<min){
+                    int temp=min;
+                    min=num[i];
+                    num[i]=temp;
+                }
+            }
+            num[j]=min;
+        }
+        return num;
+    }
+}
