@@ -1,0 +1,28 @@
+package paixu;
+
+/**
+ * Created by peiyu on 2017/9/10.
+ * 冒泡排序
+ */
+public class maopao {
+    public static void main(String[] args){
+        int[] num={2,4,1,3};
+        num = sorted(num);
+        for(int i=0;i<num.length;i++){
+            System.out.println(num[i]);
+        }
+    }
+    public static int[] sorted(int[] num) {
+        for(int j=0;j<num.length-1;j++){
+            for(int i=0;i<num.length-1-j;i++){
+                if(num[i+1]>num[i]){
+                    int temp=num[i];
+                    num[i]=num[i+1];
+                    num[i+1]=temp;
+                }
+            }
+        }
+
+       return num;
+    }
+}
