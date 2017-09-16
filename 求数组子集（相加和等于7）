@@ -1,0 +1,29 @@
+import java.util.Arrays;
+
+public class test {
+
+    static int[] flag = new int[100];
+    static int index = 0;
+    static int max = -1;
+    public static void numGroup(int[] arr, int start, int length, int sum) {
+        if (sum == 0) {
+            for (int j = 0; j < index; j++) {
+                System.out.print(flag[j]);
+            }
+            System.out.println();
+        }
+        else {
+                for (int i = start; i < length; i++) {
+                    flag[index++] = arr[i];
+                    numGroup(arr, i + 1, length-1, sum - arr[i]);
+                }
+            }
+            index--;
+        }
+    public static void main(String[] args) {
+        int [] arr = {1,2,3,4,5,6};
+        Arrays.sort(arr);
+        numGroup(arr, 0, arr.length, 7);
+//        System.out.println(max);
+    }
+}
