@@ -1,0 +1,24 @@
+public class test {
+    public static void main(String[] args) {
+        int[] array = {1,2};
+        int end = (1 << array.length) ; //1左移n位，一共有2^n种情况
+        boolean bNullSet = false;
+//        int num = 0;
+        for (int mark = 0; mark < end; mark++)
+        {
+            bNullSet = true;
+            for (int i = 0; i < array.length; i++)
+            {
+                if (((1<<i)&mark) != 0) //该位有元素输出
+                {
+                    bNullSet = false;
+                    int n = array[i];
+                    System.out.print(n);
+//                    num++;
+                }
+            }
+            System.out.print(" ");
+        }
+//        System.out.println(num);
+    }
+}
